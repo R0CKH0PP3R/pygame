@@ -1,10 +1,10 @@
 #### My attempt at learning something new & fun.
 
-#### Pong
+- [Pong](pong.py)
 Adapted from [this tutorial](https://www.youtube.com/watch?v=Qf3-aDXG8q4).
 
-#### Snake
+- [Snake](snake.py)
 Adapted from [this tutorial](https://www.youtube.com/watch?v=QFvqStqPCRU).
 
-#### Chopper 
+- [Chopper](chopper.py)
 My first solo flight.

@@ -162,19 +162,17 @@ class Main():
 		self.hud = HUD()
 		self.player.rect.x = screen_width*0.33 - self.player.width
 		self.player.rect.y = screen_height*0.5 - self.player.height*0.5
-		# store obstacles in a group & create surface
+		# store obstacles in a group
 		self.obstacle_group = pg.sprite.Group()
-		self.obstacles_surf = pg.Surface((screen_width,screen_height),pg.SRCALPHA)
 		# store power-ups in a group - one is automatically removed when one is added
 		self.pup_group = pg.sprite.GroupSingle()
-		self.pup_surf = pg.Surface((screen_width,screen_height),pg.SRCALPHA)
 		# keep track of game state
 		self.speed = 5
 		self.score = 0
 		self.score_multi = 1
 		self.pup_requests = 0
 		self.over = False
-		# create & manage the main game objects
+		# timers
 		self.obs_timer = MyTimer(1000)
 		self.pup_timer = MyTimer(500, False)
 		self.gov_timer = MyTimer(500, False)
@@ -229,10 +227,9 @@ class Main():
 			# ic(self.player.crash)	
 		
 		# move, check & remove obstacles
-		self.obstacles_surf.fill((0,0,0,0))
 		for obstacle in self.obstacle_group:
 			obstacle.rect.x -= self.speed * frc
-			self.obstacles_surf.blit(obstacle.sprite_surf, obstacle.rect)
+			screen.blit(obstacle.sprite_surf, obstacle.rect)
 			# check obstacle collisions
 			if obstacle.passed == False:
 				if self.player.rect.colliderect(obstacle.rect):
@@ -248,10 +245,9 @@ class Main():
 				self.obstacle_group.remove(obstacle)
 				
 		# move pup
-		self.pup_surf.fill((0,0,0,0))
 		for pup in self.pup_group:
 			pup.rect.x -= self.speed * frc
-			self.pup_surf.blit(pup.sprite_surf, pup.rect)
+			screen.blit(pup.sprite_surf, pup.rect)
 			# check for player pick-up
 			if pup.collected == False:
 				if self.player.rect.colliderect(pup.rect):
@@ -380,9 +376,7 @@ while True:
 		screen.blit(ovr_surf, (0,0))
 	else:
 		main_game.update()
-		screen.blit(main_game.obstacles_surf, (0,0))
 		screen.blit(main_game.tunnel.surf, (0,0))
-		screen.blit(main_game.pup_surf, (0, 0))
 		screen.blit(main_game.player.surf, main_game.player.rect)
 		screen.blit(main_game.hud.surf, (0,screen_height-main_game.hud.height))
 

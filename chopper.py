@@ -5,6 +5,10 @@ import sys
 # from icecream import ic 
 import random
 import math
+import os
+
+os.environ['PYGAME_BLEND_ALPHA_SDL2'] = '1'
+os.environ['SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR'] = '0'
 
 class Chopper():
 	def __init__(self):
